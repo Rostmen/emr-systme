@@ -1,0 +1,59 @@
+<navigation></navigation>
+
+<div class="container">
+  <div class="row">
+    
+     <div class="col-md-6">
+
+      <h1 class="form-signin-heading">Your profile</h1>
+
+      <form  class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Full name</label>
+          <p class="form-control-static">{{ vm.user.fullname }}</p>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Email</label>
+          <p class="form-control-static">{{ vm.user.email }}</p>
+        </div>
+      </form>
+
+      <div class="container">
+        <table  class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Systolic</th>
+              <th>Diastolic</th>
+              <th>MAP</th>
+              <th>Pulse</th>
+              <th>&nbsp</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+                <td>&nbsp</td>
+                <td><input type="text" class="form-control" ng-model="vm.record.systolic"></td>
+                <td><input type="text" class="form-control" ng-model="vm.record.diastolic"></td>
+                <td><input type="text" class="form-control" ng-model="vm.record.map"></td>
+                <td><input type="text" class="form-control" ng-model="vm.record.pulse"></td>
+                <td><button class="btn btn-primary" ng-click="vm.onSubmitRecord()">Submit</button></td>
+                <td><button class="btn btn-info" ng-click="vm.onUpdateRecord()">Update</button></td>
+            </tr>
+            <tr ng-repeat="record in vm.records">
+              <td>{{ record._id }}</td>
+              <td>{{ record.systolic }}</td>
+              <td>{{ record.diastolic }}</td>
+              <td>{{ record.map }}</td>
+              <td>{{ record.pulse }}</td>
+              <td><button class="btn btn-danger" ng-click="vm.removeRecord(record._id)">Remove</button></td> 
+              <td><button class="btn btn-warning" ng-click="vm.editRecord(record._id)">Edit</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+</div>

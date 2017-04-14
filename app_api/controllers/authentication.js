@@ -33,11 +33,19 @@ module.exports.register = function(req, res, next) {
     user.provider = 'local';
 
     user.save(function(err) {
-      var token;
-      token = user.generateJwt();
+
+      if (err) {
+        res.status(401);
+        res.json({
+          "message": getErrorMessage(err)
+        });
+
+        return;
+      }
+
       res.status(200);
       res.json({
-        "token" : token
+        "token" : user.generateJwt()
       });
     });
   }

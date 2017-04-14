@@ -16,9 +16,7 @@ var getErrorMessage = function(err) {
 // Create
 module.exports.create = function(req, res) {
 
-  var owner_id = req.payload._id;
-
-  if (!owner_id) {
+  if (!req.user) {
     res.status(401).json({ "message" : "UnauthorizedError: private data" });
   } else {
 
@@ -37,13 +35,13 @@ module.exports.create = function(req, res) {
 
 module.exports.list = function(req, res) {
 
-  var owner_id = req.payload._id;
 
-  if (!owner_id) {
+
+  if (!req.user) {
     res.status(401).json({ "message" : "UnauthorizedError: private data" });
   } else {
     Record
-      .find({owner: mongoose.Types.ObjectId(owner_id)})
+      .find({creator: req.user})
       .exec(function(err, records) {
         if (err)
           res.status(500).send(err);
@@ -56,9 +54,7 @@ module.exports.list = function(req, res) {
 
 module.exports.read = function(req, res) {
 
-  var owner_id = req.payload._id;
-
-  if (!owner_id) {
+  if (!req.user) {
     res.status(401).json({ "message" : "UnauthorizedError: private data" });
   } else {
     var record_id = req.params.id;
@@ -68,7 +64,7 @@ module.exports.read = function(req, res) {
       Record
       .findOne({
         _id: mongoose.Types.ObjectId(record_id),
-        owner: mongoose.Types.ObjectId(owner_id)        
+        creator: mongoose.Types.ObjectId(req.user._id)        
       })
       .exec(function(err, record) {
         if (err)
@@ -83,9 +79,9 @@ module.exports.read = function(req, res) {
 
 module.exports.delete = function(req, res) {
 
-  var owner_id = req.payload._id;
 
-  if (!owner_id) {
+
+  if (!req.user) {
     res.status(401).json({ "message" : "UnauthorizedError: private data" });
   } else {
     var record_id = req.params.id;
@@ -95,7 +91,7 @@ module.exports.delete = function(req, res) {
       Record
         .remove({
           _id: mongoose.Types.ObjectId(record_id),
-          owner: mongoose.Types.ObjectId(owner_id)
+          creator: mongoose.Types.ObjectId(req.user._id)
         })
         .exec(function(err) {
           if (err)
@@ -110,9 +106,7 @@ module.exports.delete = function(req, res) {
 
 module.exports.update = function(req, res) {
 
-  var owner_id = req.payload._id
-
-  if (!owner_id) {
+  if (!req.user) {
     res.status(401).json({ "message" : "UnauthorizedError: private data" });
   } else {
     var record_id = req.params.id
@@ -122,7 +116,7 @@ module.exports.update = function(req, res) {
       Record
         .findOne({
           _id: mongoose.Types.ObjectId(record_id),
-          owner: mongoose.Types.ObjectId(owner_id)        
+          creator: mongoose.Types.ObjectId(req.user._id)        
         })
         .exec(function(err, record) {
           if (err)

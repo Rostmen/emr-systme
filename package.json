@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
+    "forever": "forever start --minUptime 1000 --spinSleepTime 1000 ./bin/www",
     "debug": "node --debug-brk=5858 ./bin/www/app.js"
   },
   "apidoc": {

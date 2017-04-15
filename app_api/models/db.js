@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var gracefulShutdown;
-var dbURI = 'mongodb://localhost/family-emr';
+
+var dbURI = 'mongodb://familyAdmin:asdqwezxc@localhost/familyEMR';
 if (process.env.NODE_ENV === 'production') {
   dbURI = process.env.MONGOLAB_URI;
 }

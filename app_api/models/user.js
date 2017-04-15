@@ -54,7 +54,11 @@ var UserSchema = new Schema({
 });
 
 UserSchema.virtual('fullname').get(function() {
-  return this.firstname + ' ' + this.lastname;
+  var fullname = this.firstname
+  if (this.lastname) {
+    fullname += ' ' + this.lastname;
+  }
+  return fullname;
 }).set(function(fullname) {
   var splitName = fullname.split(' ');
   this.firstname = splitName[0] || '';

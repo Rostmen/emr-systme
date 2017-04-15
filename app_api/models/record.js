@@ -2,6 +2,14 @@ var mongoose = require( 'mongoose' );
 var Schema = mongoose.Schema;
 
 var recordSchema = new Schema({ 
+  source_info: {
+    uuid: String,
+    device: {
+        name: String,
+        identifier: String 
+    }
+  },
+
   created_at  : { 
     type: Date,
     default: Date.now
@@ -9,23 +17,17 @@ var recordSchema = new Schema({
   updated_at  : { 
     type: Date
    },
+
   creator : { 
     type: Schema.ObjectId, 
     ref: 'User'
   },
-  pulse : { 
-    type: Number 
-  },
-  systolic  : { 
-    type: Number 
-  },
-  diastolic : { 
-    type: Number
-   },
-  map : { 
-    type: Number
-   }
-});
+
+  payload: {
+    required: 'Payload is required',
+    type: Schema.Types.Mixed
+  }
+}); 
 
 // on every save, add the date
 recordSchema.pre('save', function(next) {

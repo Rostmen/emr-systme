@@ -33,19 +33,19 @@
           <tbody>
             <tr>
                 <td>&nbsp</td>
-                <td><input type="text" class="form-control" ng-model="vm.record.systolic"></td>
-                <td><input type="text" class="form-control" ng-model="vm.record.diastolic"></td>
-                <td><input type="text" class="form-control" ng-model="vm.record.map"></td>
-                <td><input type="text" class="form-control" ng-model="vm.record.pulse"></td>
+                <td><input type="text" class="form-control" ng-model="vm.record.payload.systolic"></td>
+                <td><input type="text" class="form-control" ng-model="vm.record.payload.diastolic"></td>
+                <td><input type="text" class="form-control" ng-model="vm.record.payload.map"></td>
+                <td><input type="text" class="form-control" ng-model="vm.record.payload.pulse"></td>
                 <td><button class="btn btn-primary" ng-click="vm.onSubmitRecord()">Submit</button></td>
                 <td><button class="btn btn-info" ng-click="vm.onUpdateRecord()">Update</button></td>
             </tr>
             <tr ng-repeat="record in vm.records">
-              <td>{{ record._id }}</td>
-              <td>{{ record.systolic }}</td>
-              <td>{{ record.diastolic }}</td>
-              <td>{{ record.map }}</td>
-              <td>{{ record.pulse }}</td>
+              <td>{{ record.source_info.device.name }}</td>
+              <td>{{ record.payload.systolic }}</td>
+              <td>{{ record.payload.diastolic }}</td>
+              <td>{{ record.payload.map }}</td>
+              <td>{{ record.payload.pulse }}</td>
               <td><button class="btn btn-danger" ng-click="vm.removeRecord(record._id)">Remove</button></td> 
               <td><button class="btn btn-warning" ng-click="vm.editRecord(record._id)">Edit</button></td>
             </tr>

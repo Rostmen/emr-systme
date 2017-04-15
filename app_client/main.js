@@ -1,7 +1,7 @@
 (function () {
 
-  angular.module('meanApp', ['ngRoute']);
-
+  angular.module('meanApp', ['ngRoute', 'ng.deviceDetector']);
+  
   function config ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
@@ -23,6 +23,9 @@
         templateUrl: '/profile/profile.view.html',
         controller: 'profileCtrl',
         controllerAs: 'vm'
+      })
+      .when('/documentation', {
+        templateUrl: '/documentation/index.html'
       })
       .otherwise({redirectTo: '/'});
 

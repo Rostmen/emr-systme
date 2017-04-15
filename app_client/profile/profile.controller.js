@@ -4,12 +4,14 @@
     .module('meanApp')
     .controller('profileCtrl', profileCtrl);
 
-  profileCtrl.$inject = ['$location', 'meanData'];
-  function profileCtrl($location, meanData) {
+  profileCtrl.$inject = ['$location', 'meanData', 'deviceDetector'];
+  function profileCtrl($location, meanData, deviceDetector) {
     var vm = this;
 
     vm.user = {};
-    vm.record = {};
+    vm.record = {
+      payload: {}
+    };
     vm.records = [];
 
     meanData.getProfile()
@@ -30,7 +32,14 @@
 
     vm.onSubmitRecord = function() {
       console.log('Submitting record');
-      meanData.createRecord(vm.record)
+      var record = vm.record;
+      record.source_info = {
+        device: {
+          name: deviceDetector.device,
+          identifier: deviceDetector.browser + '/' + deviceDetector.browser_version
+        }
+      };
+      meanData.createRecord(record)
       .error(function(err){
         alert(err);
       })

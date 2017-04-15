@@ -38,6 +38,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // [SH] Set the app_client folder to serve static resources
 app.use(express.static(path.join(__dirname, 'app_client')));
+app.use(express.static(path.join(__dirname, 'apidoc')));
 
 // [SH] Initialise Passport before using the route middleware
 app.use(passport.initialize());

@@ -19,7 +19,7 @@ var sendJSONresponse = function(res, status, content) {
 
 
   /**
-   * @api {post} /api/profile Create
+   * @api {post} /api/profile/record Create
    * @apiVersion 0.0.1
    * @apiName Create
    * @apiGroup Record
